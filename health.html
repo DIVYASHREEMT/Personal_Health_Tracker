@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Health Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dashboard">
+
+<div class="dashboard-container">
+    <h1>Welcome {{ username }}!</h1>
+
+    {% if reminders %}
+    <h3>Reminders:</h3>
+    <ul>
+        {% for reminder in reminders %}
+            <li>{{ reminder }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h3>Your BMI: {{ bmi }} ({{ bmi_category }})</h3>
+
+    <form action="/health" method="POST">
+        <label for="height">Height (in cm):</label>
+        <input type="number" name="height" required>
+        <label for="weight">Weight (in kg):</label>
+        <input type="number" name="weight" required>
+        <label for="water_intake">Water Intake (in Liters):</label>
+        <input type="number" step="0.1" name="water_intake" required>
+        <label for="sleep_hours">Sleep Hours:</label>
+        <input type="number" step="0.1" name="sleep_hours" required>
+        <label for="exercise_hours">Exercise(in minutes):</label>
+        <input type="number" step="0.1" name="exercise_hours" required>
+        <button type="submit">Update</button>
+    </form>
+
+    <button onclick="window.location.href='/chatbot'">Chat with Bot</button>
+    <a href="/logout">Logout</a>
+</div>
+
+</body>
+</html>

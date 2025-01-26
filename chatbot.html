@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function sendMessage() {
+            var userMessage = document.getElementById('user-message').value;
+            var chatbox = document.getElementById('chatbox');
+            chatbox.innerHTML += "<div><strong>You:</strong> " + userMessage + "</div>";
+            
+            fetch('/chatbot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'user_message=' + encodeURIComponent(userMessage)
+            })
+            .then(response => response.text())
+            .then(data => {
+                chatbox.innerHTML += "<div><strong>Bot:</strong> " + data + "</div>";
+                document.getElementById('user-message').value = ''; // Clear input field
+                chatbox.scrollTop = chatbox.scrollHeight; // Auto scroll to the bottom
+            });
+        }
+    </script>
+</head>
+<body class="chatbot">
+
+    <div class="chatbot-container">
+        <h1>Chat with Our Bot</h1>
+        <div id="chatbox" class="chatbox">
+            <!-- Chat history will appear here -->
+        </div>
+        <input type="text" id="user-message" placeholder="Ask me anything..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</body>
+</html>
