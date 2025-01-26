@@ -1,4 +1,4 @@
-# Personal_Health_Tracker with MediBot - An AI Medicine Chatbot] 🎯
+# Personal_Health_Tracker with MediBot - An AI Medicine Chatbot 🎯
 ## Basic Details
 ### Team Name: Tech Titans
 ### Team Members
