@@ -12,7 +12,7 @@ app.secret_key = 'your_secret_key'  # Set a secret key for sessions
 # MySQL configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'  # Adjust with your MySQL username
-app.config['MYSQL_PASSWORD'] = 'Shree@27'  # Adjust with your MySQL password
+app.config['MYSQL_PASSWORD'] = 'password'  # Adjust with your MySQL password
 app.config['MYSQL_DB'] = 'health_tracker_db'
 mysql = MySQL(app)
 
@@ -46,7 +46,7 @@ def home():
 
         if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):  # user[2] is the password hash
             session['user'] = username  # Store username in session to keep the user logged in
-            return redirect(url_for('health'))  # Redirect to health page (user dashboard)
+            return redirect(url_for('health')) 
         else:
             flash('Invalid username or password', 'danger')
 
@@ -163,7 +163,7 @@ def generate_response(user_message):
 # Route for Logout (Redirect to Home)
 @app.route('/logout')
 def logout():
-    session.pop('user', None)  # Remove user from session
+    session.pop('user', None)  
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
